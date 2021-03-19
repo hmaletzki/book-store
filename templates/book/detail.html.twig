@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+    <div class="headline">
+        <h1>{{ book.name }}</h1>
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr class="table-headline">
+                <th>Release Date</th>
+                <th>Length</th>
+                <th>Genres</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="table-row">
+                    <td class="table-column">{{ book.releaseDate | date('d.m.Y')}}</td>
+                    <td class="table-column">{{ book.length }}</td>
+                    <td class="table-column">
+                        <ul>
+                            {% for genre in book.genres %}
+                                <li>{{ genre.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('home') }}"><button>Back</button></a>
+    </div>
+{% endblock %}

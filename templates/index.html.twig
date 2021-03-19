@@ -20,7 +20,7 @@
             <tbody>
                 {% for book in books %}
                     <tr class="table-row">
-                        <td class="table-column">{{ book.name }}</td>
+                        <td class="table-column"><a href="{{ path('book', {'name': book.slug}) }}">{{ book.name }}</a></td>
                         <td class="table-column">{{ book.releaseDate | date('d.m.Y')}}</td>
                         <td class="table-column">{{ book.length }}</td>
                         <td class="table-column">

@@ -7,32 +7,6 @@
         <h1>Folgende Bücher sind vorhanden</h1>
     </div>
     <div class="content">
-
-        <table>
-            <thead>
-                <tr class="table-headline">
-                    <th>Name</th>
-                    <th>Release Date</th>
-                    <th>Length</th>
-                    <th>Genres</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
-                    <tr class="table-row">
-                        <td class="table-column"><a href="{{ path('book', {'name': book.slug}) }}">{{ book.name }}</a></td>
-                        <td class="table-column">{{ book.releaseDate | date('d.m.Y')}}</td>
-                        <td class="table-column">{{ book.length }}</td>
-                        <td class="table-column">
-                            <ul>
-                                {% for genre in book.genres %}
-                                    <li>{{ genre.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% include 'book/_books_table.html.twig' with {'books': books} %}
     </div>
 {% endblock %}

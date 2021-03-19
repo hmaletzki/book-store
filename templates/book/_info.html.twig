@@ -1,0 +1,12 @@
+<tr class="table-row">
+    <td class="table-column"><a href="{{ path('book', {'name': book.slug}) }}">{{ book.name }}</a></td>
+    <td class="table-column">{{ book.releaseDate | date('d.m.Y') }}</td>
+    <td class="table-column">{{ book.length }}</td>
+    <td class="table-column">
+        <ul>
+            {% for genre in book.genres %}
+                <li><a href="{{ path('genre', {'name': genre.name}) }}">{{ genre.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </td>
+</tr>

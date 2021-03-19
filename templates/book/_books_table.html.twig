@@ -1,0 +1,15 @@
+<table>
+    <thead>
+    <tr class="table-headline">
+        <th>Name</th>
+        <th>Release Date</th>
+        <th>Length</th>
+        <th>Genres</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+        {% include 'book/_info.html.twig' with {'book': book} %}
+    {% endfor %}
+    </tbody>
+</table>

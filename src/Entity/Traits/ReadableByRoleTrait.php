@@ -33,9 +33,8 @@ trait ReadableByRoleTrait
 
     /**
      * @param bool $readableByUser
-     * @return ReadableByRole
      */
-    public function setReadableByUser(bool $readableByUser): ReadableByRole
+    public function setReadableByUser(bool $readableByUser)
     {
         $this->readableByUser = $readableByUser;
 
@@ -52,9 +51,8 @@ trait ReadableByRoleTrait
 
     /**
      * @param bool $readableByAdmin
-     * @return ReadableByRole
      */
-    public function setReadableByAdmin(bool $readableByAdmin): ReadableByRole
+    public function setReadableByAdmin(bool $readableByAdmin)
     {
         $this->readableByAdmin = $readableByAdmin;
 

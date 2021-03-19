@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Entity\Traits\ReadableByRoleTrait;
+use App\Entity\Traits\SlugableTrait;
 use App\Repository\BookRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * Class representing a book
@@ -16,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Book
 {
     use ReadableByRoleTrait;
+    use SlugableTrait;
 
     /**
      * @ORM\Id
@@ -45,7 +49,7 @@ class Book
      * @ORM\ManyToMany(targetEntity="Genre", inversedBy="books")
      * @ORM\JoinTable(name="books_genres")
      */
-    private ArrayCollection $genres;
+    private Collection $genres;
 
     /**
      * Book constructor.
@@ -68,6 +72,8 @@ class Book
     public function setName(string $name): self
     {
         $this->name = $name;
+        $slugger = new AsciiSlugger();
+        $this->setSlug($slugger->slug($name));
 
         return $this;
     }
@@ -103,7 +109,7 @@ class Book
         }
 
         $genre->addBook($this);
-        $this->genres[] = $genre;
+        $this->genres->add($genre);
     }
 
     public function removeGenre(Genre $genre): void
@@ -111,8 +117,15 @@ class Book
         $this->genres->removeElement($genre);
     }
 
-    public function getGenres(): ArrayCollection
+    public function getGenres(): Collection
     {
         return $this->genres;
+    }
+
+    public function setGenres(ArrayCollection $genres): self
+    {
+        $this->genres = $genres;
+
+        return $this;
     }
 }
